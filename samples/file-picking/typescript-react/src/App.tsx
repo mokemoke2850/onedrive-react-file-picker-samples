@@ -1,35 +1,34 @@
 import React, { useState } from 'react';
 import './App.css';
-import { getToken } from "./auth";
+import { getToken } from './auth';
 import PickerButton from './components/picker';
-import { IFilePickerOptions } from "@pnp/picker-api";
-import PickedFilesList from "./components/picked-files-list";
+import { IFilePickerOptions } from '@pnp/picker-api';
+import PickedFilesList from './components/picked-files-list';
 
 const paramsTest: IFilePickerOptions = {
-  sdk: "8.0",
+  sdk: '8.0',
   entry: {
-    oneDrive: {}
+    oneDrive: {},
   },
   authentication: {},
   messaging: {
-    origin: "http://localhost:3000",
-    channelId: "27"
+    origin: 'http://localhost:3000',
+    channelId: '27',
   },
   selection: {
-    mode: "multiple",
+    mode: 'multiple',
   },
   typesAndSources: {
     // filters: [".docx"],
-    mode: "files",
+    mode: 'files',
     pivots: {
       oneDrive: true,
       recent: true,
-    }
-  }
+    },
+  },
 };
 
 function App() {
-
   const [results, setResults] = useState(null);
 
   function onPicked(pickerResults) {
@@ -38,11 +37,15 @@ function App() {
     }
   }
 
-
   return (
     <div className="App">
       Launch the picker using this button: <br />
-      <PickerButton baseUrl="https://{tenant}-my.sharepoint.com/" getToken={getToken} options={paramsTest} onResults={onPicked} />
+      <PickerButton
+        baseUrl="https://api.onedrive.com/"
+        getToken={getToken}
+        options={paramsTest}
+        onResults={onPicked}
+      />
       <PickedFilesList items={results} />
     </div>
   );
